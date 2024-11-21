@@ -1,6 +1,7 @@
+from app.models import InvalidResponse, NationalId, NationalIdData, ValidResponse
 from fastapi import FastAPI, Request
 from fastapi.responses import RedirectResponse
-from app.models import InvalidResponse, NationalId, NationalIdData, ValidResponse
+import re
 from utils.national_id_data import extract_birth_date, extract_birth_date_serial, extract_birth_governerate, extract_gender
 
 
@@ -9,8 +10,8 @@ app = FastAPI(title="Vaidate National Id Number", version="1.0", debug=True)
 @app.post("/validate-nid")
 def validate_national_id(request: NationalId):
     nid = request.national_id
-    if(len(nid) != 14):
-        return InvalidResponse(message="National ID number should be 14 digits")
+    if re.match(r"^\d{14}$", nid) is None:
+        return InvalidResponse(message="National ID number must be exactly 14 digits")
     try:
         birth_date = extract_birth_date(nid)
         birth_governerate = extract_birth_governerate(nid)
