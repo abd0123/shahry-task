@@ -85,7 +85,7 @@ def extract_birth_date_serial(nid: str):
         1- tenth, eleventh, twelfth, and Thirteenth digits are the birth date serial
 
     Args:
-        nid (str): _description_
+        nid (str): national id number
     Returns:
         _type_: str
     """
