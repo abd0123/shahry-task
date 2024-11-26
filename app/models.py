@@ -12,7 +12,7 @@ class InvalidResponse(Resoponse):
 
 class NationalIdData(BaseModel):
     birth_date: str
-    birth_governerate: str
+    birth_governorate: str
     birth_date_serial: str
     gender: str
 

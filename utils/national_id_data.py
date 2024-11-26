@@ -2,7 +2,7 @@ from datetime import datetime
 
 from utils.enums import Gender
 
-CODE_TO_GOVERNERATE = {
+CODE_TO_GOVERNORATE = {
     '01': 'Cairo',
     '02': 'Alexandria',
     '03': 'Port Said',
@@ -34,7 +34,7 @@ CODE_TO_GOVERNERATE = {
 }
 
 def extract_birth_date(nid: str):
-    """extracts the birth date from the national id number with the follwoing consideration:
+    """extracts the birth date from the national id number with the following consideration:
         1- first digit is the century 2 -> (1901 - 1999)
         2- second and third digits are the year of birth
         3- fourth and fifth digits are the month of birth
@@ -61,9 +61,9 @@ def extract_birth_date(nid: str):
     return birth_date
 
 
-def extract_birth_governerate(nid: str):
-    """extracts the birth governerate from the national id number
-        1- eighth and ninth digits are the birth governerate code
+def extract_birth_governorate(nid: str):
+    """extracts the birth governorate from the national id number
+        1- eighth and ninth digits are the birth governorate code
 
     Args:
         nid (str): national id number
@@ -71,14 +71,14 @@ def extract_birth_governerate(nid: str):
     Returns:
         _type_: str
     Raises:
-        ValueError: if governerate code is not valid
+        ValueError: if governorate code is not valid
     """
-    birth_governerate_code = nid[7:9]
+    birth_governorate_code = nid[7:9]
     
-    if (birth_governerate_code in CODE_TO_GOVERNERATE.keys()):
-        return CODE_TO_GOVERNERATE[str(birth_governerate_code)]
+    if (birth_governorate_code in CODE_TO_GOVERNORATE.keys()):
+        return CODE_TO_GOVERNORATE[str(birth_governorate_code)]
     else:
-        raise ValueError(f"Birth governerate code is not valid: {birth_governerate_code}")
+        raise ValueError(f"Birth governorate code is not valid: {birth_governorate_code}")
 
 def extract_birth_date_serial(nid: str):
     """extracts unique serial for the birth date from the national id number

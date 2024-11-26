@@ -2,7 +2,7 @@ from app.models import InvalidResponse, NationalId, NationalIdData, ValidRespons
 from fastapi import FastAPI, Request
 from fastapi.responses import RedirectResponse
 import re
-from utils.national_id_data import extract_birth_date, extract_birth_date_serial, extract_birth_governerate, extract_gender
+from utils.national_id_data import extract_birth_date, extract_birth_date_serial, extract_birth_governorate, extract_gender
 
 
 app = FastAPI(title="Vaidate National Id Number", version="1.0", debug=True)
@@ -14,7 +14,7 @@ def validate_national_id(request: NationalId):
         return InvalidResponse(message="National ID number must be exactly 14 digits")
     try:
         birth_date = extract_birth_date(nid)
-        birth_governerate = extract_birth_governerate(nid)
+        birth_governorate = extract_birth_governorate(nid)
         birth_date_serial = extract_birth_date_serial(nid)
         gender = extract_gender(nid)
     except ValueError as e:
@@ -23,7 +23,7 @@ def validate_national_id(request: NationalId):
     return ValidResponse(
             data=NationalIdData(
                     birth_date=birth_date,
-                    birth_governerate=birth_governerate,
+                    birth_governorate=birth_governorate,
                     birth_date_serial=birth_date_serial,
                     gender=gender
                 )
